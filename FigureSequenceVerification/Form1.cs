@@ -28,13 +28,14 @@ namespace FigureSequenceVerification
             Dictionary<string, int[]> dictionaryOfModuleFigureIndexNumbers = new Dictionary<string, int[]>();
             Console.Write(DateTime.Now);
             Microsoft.Office.Interop.Word.Application wrdApp = new Microsoft.Office.Interop.Word.Application();
+            wrdApp.Visible = false;
             // for all docs
             var files = Directory.GetFiles(@"C:\Users\kstaples\Documents\Projects\Update ILMS\Modules", "*.docx", SearchOption.AllDirectories);
             
             // for all files try and find associative module
             for (var i = 0; i < files.Length; i++)
             {
-                Console.WriteLine(i);
+                Console.WriteLine(DateTime.Now+", "+i);
                 if (files[i].IndexOf("~") > -1) { continue; }
                 var doc = wrdApp.Documents.Open(files[i],false,true);
                 getArrayOfFigureIndexNumbers(doc, wrdApp, dictionaryOfModuleFigureIndexNumbers);
